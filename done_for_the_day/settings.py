@@ -12,6 +12,12 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
+# noinspection PyUnresolvedReferences
+try:
+    import api_keys
+except ImportError as e:
+    print "Unable to import api_keys.py, Create one"
+    raise ImportError("Unable to Import api_keys", e)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
@@ -36,6 +42,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'dones',
+    'googlelogin',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -48,6 +56,10 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
+AUTHENTICATION_BACKENDS = (
+    'googlelogin.backends.GoogleAuthBackend',
+)
+AUTH_USER_MODEL = 'googlelogin.GoogleUser'
 ROOT_URLCONF = 'done_for_the_day.urls'
 
 WSGI_APPLICATION = 'done_for_the_day.wsgi.application'
@@ -81,3 +93,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
+
+GOOGLE_CLIENT_ID = api_keys.GOOGLE_CLIENT_ID
+GOOGLE_CLIENT_SECRET = api_keys.GOOGLE_CLIENT_SECRET
+GOOGLE_SCOPE = 'https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile'
+GOOGLE_REDIRECT_URI = ''

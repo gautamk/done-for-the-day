@@ -108,10 +108,9 @@ crashlytics-build.properties
 # Created by https://www.gitignore.io
 
 ### Django ###
-*.log
-*.pot
-*.pyc
-__pycache__/
 local_settings.py
+
+### API Keys ###
+api_keys.py
 
 *.sqlite3
