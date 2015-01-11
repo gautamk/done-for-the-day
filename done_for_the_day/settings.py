@@ -44,6 +44,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'dones',
     'googlelogin',
+    'django_cron',
 )
 
 MIDDLEWARE_CLASSES = (
